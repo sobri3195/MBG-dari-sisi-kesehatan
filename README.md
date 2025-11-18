@@ -1,128 +1,187 @@
-# Sistem Pengamanan Kesehatan MBG
+# MBG Health Security System
 
-Sistem digital untuk pengamanan kesehatan pada kegiatan MBG (Marinir Besar) yang komprehensif dan terintegrasi.
+Sistem Pengamanan Kesehatan MBG - Comprehensive Health Security System untuk monitoring dan manajemen kesehatan personel dalam kegiatan MBG (Military/Government/Business operations).
 
-## Tujuan Utama
+## 🚀 Features
 
-- Menjamin semua personel, tamu, dan pendukung yang terlibat di MBG dalam kondisi kesehatan yang aman
-- Mencegah masuknya penyakit menular dan kondisi medis berisiko tinggi
-- Menyediakan respons medis cepat bila terjadi insiden kesehatan
-- Terdokumentasi dengan rapi dan dapat dipertanggungjawabkan
+- **Pre-Event Health Screening** - Pendaftaran dan skrining kesehatan personel dengan pemberian QR code clearance
+- **Entry Health Security Check** - Validasi QR code dan rapid triage di checkpoint
+- **On-Site Monitoring** - Tracking insiden kesehatan real-time dan medical response
+- **Medical Posts Management** - Manajemen pos kesehatan dan inventory
+- **Reports & Analytics** - Dashboard komprehensif dengan statistik dan visualisasi data
 
-## Fitur Utama
+## 🛠️ Tech Stack
 
-### 1. Pra-Kegiatan (Pre-Event Health Screening)
-- Registrasi kesehatan awal dengan form lengkap
-- Pemeriksaan kesehatan dasar (tekanan darah, nadi, suhu, BMI, saturasi O₂)
-- Kriteria kelayakan: Fit / Fit dengan catatan / Tidak fit
-- Penerbitan Health Clearance Pass (QR Code)
+- **React 18** - Modern UI library
+- **TypeScript** - Type safety
+- **Vite** - Fast build tool
+- **Tailwind CSS** - Utility-first CSS framework
+- **Recharts** - Data visualization
+- **QRCode** - QR code generation
+- **LocalStorage** - Client-side data persistence
 
-### 2. Kedatangan & Pintu Masuk (Entry Health Security Check)
-- Pos kesehatan di gate/checkpoint
-- Validasi Health Clearance dengan scan QR Code
-- Rapid Triage (Hijau/Kuning/Merah)
-- Ruang observasi cepat
+## 📦 Installation
 
-### 3. Pengawasan Kesehatan Selama Kegiatan (On-Site Monitoring)
-- Pos kesehatan utama dan satelit
-- Patroli kesehatan mobile
-- Monitoring personel kritis (VIP/pasukan khusus)
-- Tracking real-time
-
-### 4. Respons Medis & Rujukan
-- Prosedur kode darurat
-- Tim respons cepat
-- Ambulans standby
-- Algoritma rujukan ke RS
-
-### 5. Pasca-Kegiatan (Post-Event Monitoring)
-- Rekap insiden kesehatan
-- Evaluasi beban kerja kesehatan
-- Pelaporan ke pimpinan
-- Follow-up kasus tertentu
-
-## Modul Sistem Digital
-
-1. **Modul Registrasi & Profil Kesehatan**
-2. **Modul Security Check Kesehatan di Pintu Masuk**
-3. **Modul Triage & Insiden On-Site**
-4. **Modul Monitoring & Dashboard Pimpinan**
-5. **Modul Logistik Kesehatan**
-6. **Modul Laporan Akhir**
-
-## Teknologi
-
-- **Frontend**: React + TypeScript + Vite
-- **Backend**: Node.js + Express + TypeScript
-- **Database**: SQLite (development) / PostgreSQL (production)
-- **QR Code**: qrcode library
-- **UI Components**: Tailwind CSS + Shadcn UI
-- **Charts**: Recharts
-
-## Struktur Proyek
-
-```
-├── client/          # Frontend React application
-├── server/          # Backend Express application
-├── docs/            # Dokumentasi SOP dan formulir
-└── README.md
-```
-
-## Instalasi
-
-### Prerequisites
-- Node.js 18+
-- npm atau yarn
-
-### Development
-
-1. Clone repository
 ```bash
-git clone <repository-url>
-cd mbg-health-security-system
-```
-
-2. Install dependencies
-```bash
+# Install dependencies
 npm install
-cd client && npm install
-cd ../server && npm install
-cd ..
-```
 
-3. Setup environment variables
-```bash
-# Server
-cp server/.env.example server/.env
-
-# Client
-cp client/.env.example client/.env
-```
-
-4. Run development servers
-```bash
+# Run development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-Frontend akan berjalan di `http://localhost:5173`
-Backend akan berjalan di `http://localhost:3000`
+## 🌐 Deploy to Netlify
 
-## Build untuk Production
+### Option 1: Deploy via Netlify CLI
 
 ```bash
+# Install Netlify CLI
+npm install -g netlify-cli
+
+# Login to Netlify
+netlify login
+
+# Build and deploy
 npm run build
-npm start
+netlify deploy --prod --dir=dist
 ```
 
-## Dokumentasi
+### Option 2: Deploy via Git
 
-Lihat folder `docs/` untuk:
-- SOP Skrining Kesehatan Pra MBG
-- SOP Security Check Kesehatan di Gate
-- SOP Penanganan Insiden Medis
-- SOP Rujukan ke Rumah Sakit
-- Template Formulir
+1. Push your code to GitHub/GitLab/Bitbucket
+2. Go to [Netlify](https://app.netlify.com)
+3. Click "New site from Git"
+4. Choose your repository
+5. Build settings:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+6. Click "Deploy site"
 
-## Lisensi
+### Option 3: Drag & Drop
 
-MIT
+1. Build the project: `npm run build`
+2. Go to [Netlify Drop](https://app.netlify.com/drop)
+3. Drag the `dist` folder to the upload area
+
+## 📱 Usage
+
+### 1. Register Personnel
+- Go to "Data Personel" → "Tambah Personel"
+- Fill in personnel details and health profile
+- Submit to register
+
+### 2. Health Screening
+- Select personnel from list
+- Click "Skrining" button
+- Fill in vital signs and health assessment
+- System will generate QR code clearance if approved
+
+### 3. Entry Check
+- Go to "Entry Check" → "Entry Check Baru"
+- Scan or input QR code from health clearance
+- Perform rapid triage
+- Record decision (Approved/Observation/Rejected)
+
+### 4. Incident Reporting
+- Go to "Insiden" → "Lapor Insiden"
+- Select affected personnel
+- Fill in incident details
+- Record actions taken and outcome
+
+### 5. View Dashboard
+- Real-time statistics
+- Personnel by category
+- Recent incidents and entry checks
+- Health clearance status
+
+## 🗂️ Project Structure
+
+```
+/
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── pages/          # Page components
+│   ├── lib/            # Utilities and services
+│   │   ├── api.ts         # API wrapper
+│   │   ├── dataService.ts # Data service layer
+│   │   ├── storage.ts     # LocalStorage utilities
+│   │   └── utils.ts       # Helper functions
+│   ├── types/          # TypeScript type definitions
+│   ├── App.tsx         # Main app component
+│   └── main.tsx        # App entry point
+├── docs/               # Documentation (SOPs)
+├── public/             # Static assets
+├── index.html          # HTML entry point
+├── netlify.toml        # Netlify configuration
+├── package.json        # Dependencies
+├── tsconfig.json       # TypeScript config
+├── tailwind.config.js  # Tailwind config
+└── vite.config.ts      # Vite config
+```
+
+## 💾 Data Storage
+
+This application uses **browser LocalStorage** for data persistence. Data is stored on the client-side and will persist across browser sessions on the same device.
+
+**Important Notes:**
+- Data is device-specific (not synced across devices)
+- Clearing browser data will delete all records
+- For production use, consider implementing a backend with database
+- Current implementation is suitable for demo, training, or single-device usage
+
+## 🔒 Data Schema
+
+### Personnel
+- Personal information (name, rank, unit, category)
+- Contact details (phone, email)
+- Health profile (medical history, allergies, medications)
+
+### Health Screening
+- Vital signs (blood pressure, heart rate, temperature, BMI, O2 saturation)
+- Fitness status and duty recommendation
+- Screener information
+
+### Health Clearance
+- QR code for validation
+- Validity period (7 days default)
+- Status (Valid/Expired/Revoked)
+
+### Entry Check
+- Checkpoint location and time
+- Temperature check
+- Triage category (HIJAU/KUNING/MERAH)
+- Decision (Approved/Observation/Rejected)
+
+### Incident
+- Type and severity
+- Location and time
+- Symptoms and vital signs
+- Actions taken and outcome
+
+## 📄 License
+
+MIT License - Free to use for any purpose
+
+## 👨‍💻 Development
+
+```bash
+# Format code
+npm run lint
+
+# Type checking
+npm run build
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+For questions or issues, please open an issue on the GitHub repository.
