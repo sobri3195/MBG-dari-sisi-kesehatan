@@ -104,12 +104,12 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Dashboard Pengamanan Kesehatan</h1>
-          <p className="text-gray-500 mt-1">Monitoring real-time kegiatan MBG</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard Pengamanan Kesehatan</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Monitoring real-time kegiatan MBG</p>
         </div>
-        <div className="text-sm text-gray-500">
+        <div className="text-xs sm:text-sm text-gray-500">
           Tanggal: {new Date(data.date).toLocaleDateString('id-ID', { 
             weekday: 'long', 
             year: 'numeric', 
@@ -119,26 +119,26 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat) => (
           <div key={stat.name} className="card">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">{stat.name}</p>
-                <p className="text-3xl font-bold mt-1">{stat.value}</p>
+                <p className="text-xs sm:text-sm text-gray-600">{stat.name}</p>
+                <p className="text-2xl sm:text-3xl font-bold mt-1">{stat.value}</p>
               </div>
-              <div className={`${stat.color} p-3 rounded-lg`}>
-                <stat.icon className="h-6 w-6 text-white" />
+              <div className={`${stat.color} p-2 sm:p-3 rounded-lg`}>
+                <stat.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div className="card">
-          <h2 className="text-lg font-semibold mb-4">Personel per Kategori</h2>
-          <ResponsiveContainer width="100%" height={300}>
+          <h2 className="text-base sm:text-lg font-semibold mb-4">Personel per Kategori</h2>
+          <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
                 data={data.personnel_by_category}
@@ -160,11 +160,11 @@ export default function Dashboard() {
         </div>
 
         <div className="card">
-          <h2 className="text-lg font-semibold mb-4">Status Kebugaran</h2>
-          <ResponsiveContainer width="100%" height={300}>
+          <h2 className="text-base sm:text-lg font-semibold mb-4">Status Kebugaran</h2>
+          <ResponsiveContainer width="100%" height={250}>
             <BarChart data={data.fitness_distribution}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="fitness_status" />
+              <XAxis dataKey="fitness_status" tick={{ fontSize: 12 }} />
               <YAxis />
               <Tooltip />
               <Legend />
@@ -174,25 +174,25 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div className="card">
-          <h2 className="text-lg font-semibold mb-4">Insiden Terbaru</h2>
+          <h2 className="text-base sm:text-lg font-semibold mb-4">Insiden Terbaru</h2>
           <div className="space-y-3">
             {data.recent_incidents.length === 0 ? (
-              <p className="text-gray-500 text-center py-4">Tidak ada insiden hari ini</p>
+              <p className="text-gray-500 text-center py-4 text-sm">Tidak ada insiden hari ini</p>
             ) : (
               data.recent_incidents.slice(0, 5).map((incident) => (
-                <div key={incident.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <AlertTriangle className={`h-5 w-5 mt-0.5 ${
+                <div key={incident.id} className="flex items-start space-x-2 sm:space-x-3 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                  <AlertTriangle className={`h-4 w-4 sm:h-5 sm:w-5 mt-0.5 flex-shrink-0 ${
                     incident.severity === 'BERAT' ? 'text-red-600' :
                     incident.severity === 'SEDANG' ? 'text-orange-600' : 'text-yellow-600'
                   }`} />
-                  <div className="flex-1">
-                    <p className="font-medium">{incident.name || 'Unknown'}</p>
-                    <p className="text-sm text-gray-600">{incident.incident_type.replace('_', ' ')}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm sm:text-base truncate">{incident.name || 'Unknown'}</p>
+                    <p className="text-xs sm:text-sm text-gray-600">{incident.incident_type.replace('_', ' ')}</p>
                     <p className="text-xs text-gray-500 mt-1">{formatDateTime(incident.incident_time)}</p>
                   </div>
-                  <span className={`badge ${
+                  <span className={`badge text-xs flex-shrink-0 ${
                     incident.severity === 'BERAT' ? 'badge-red' :
                     incident.severity === 'SEDANG' ? 'badge-yellow' : 'badge-green'
                   }`}>
@@ -205,23 +205,23 @@ export default function Dashboard() {
         </div>
 
         <div className="card">
-          <h2 className="text-lg font-semibold mb-4">Entry Check Terbaru</h2>
+          <h2 className="text-base sm:text-lg font-semibold mb-4">Entry Check Terbaru</h2>
           <div className="space-y-3">
             {data.recent_entry_checks.length === 0 ? (
-              <p className="text-gray-500 text-center py-4">Tidak ada entry check hari ini</p>
+              <p className="text-gray-500 text-center py-4 text-sm">Tidak ada entry check hari ini</p>
             ) : (
               data.recent_entry_checks.slice(0, 5).map((entry) => (
-                <div key={entry.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <CheckCircle className={`h-5 w-5 mt-0.5 ${
+                <div key={entry.id} className="flex items-start space-x-2 sm:space-x-3 p-2 sm:p-3 bg-gray-50 rounded-lg">
+                  <CheckCircle className={`h-4 w-4 sm:h-5 sm:w-5 mt-0.5 flex-shrink-0 ${
                     entry.decision === 'APPROVED' ? 'text-green-600' :
                     entry.decision === 'REJECTED' ? 'text-red-600' : 'text-yellow-600'
                   }`} />
-                  <div className="flex-1">
-                    <p className="font-medium">{entry.name || 'Unknown'}</p>
-                    <p className="text-sm text-gray-600">{entry.checkpoint_location}</p>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-sm sm:text-base truncate">{entry.name || 'Unknown'}</p>
+                    <p className="text-xs sm:text-sm text-gray-600 truncate">{entry.checkpoint_location}</p>
                     <p className="text-xs text-gray-500 mt-1">{formatDateTime(entry.check_time)}</p>
                   </div>
-                  <span className={`badge ${
+                  <span className={`badge text-xs flex-shrink-0 ${
                     entry.decision === 'APPROVED' ? 'badge-green' :
                     entry.decision === 'REJECTED' ? 'badge-red' : 'badge-yellow'
                   }`}>

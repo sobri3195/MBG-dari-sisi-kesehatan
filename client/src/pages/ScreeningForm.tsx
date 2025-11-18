@@ -85,28 +85,28 @@ export default function ScreeningForm() {
       <div className="max-w-2xl mx-auto">
         <div className="card text-center">
           <div className="mb-6">
-            <QrCode className="h-12 w-12 mx-auto text-green-600 mb-4" />
-            <h2 className="text-2xl font-bold text-green-600">Skrining Berhasil!</h2>
-            <p className="text-gray-600 mt-2">Health Clearance Pass telah diterbitkan</p>
+            <QrCode className="h-10 w-10 sm:h-12 sm:w-12 mx-auto text-green-600 mb-4" />
+            <h2 className="text-xl sm:text-2xl font-bold text-green-600">Skrining Berhasil!</h2>
+            <p className="text-gray-600 mt-2 text-sm sm:text-base">Health Clearance Pass telah diterbitkan</p>
           </div>
 
-          <div className="bg-gray-50 p-6 rounded-lg mb-6">
-            <img src={qrCode} alt="QR Code" className="mx-auto mb-4" style={{ width: '200px' }} />
-            <p className="text-sm text-gray-600 mb-2">QR Code Health Clearance</p>
-            <p className="font-semibold">{personnel.name}</p>
-            <p className="text-sm text-gray-600">{personnel.rank} - {personnel.unit}</p>
+          <div className="bg-gray-50 p-4 sm:p-6 rounded-lg mb-6">
+            <img src={qrCode} alt="QR Code" className="mx-auto mb-4" style={{ width: '150px', maxWidth: '100%' }} />
+            <p className="text-xs sm:text-sm text-gray-600 mb-2">QR Code Health Clearance</p>
+            <p className="font-semibold text-sm sm:text-base">{personnel.name}</p>
+            <p className="text-xs sm:text-sm text-gray-600">{personnel.rank} - {personnel.unit}</p>
           </div>
 
-          <div className="flex justify-center space-x-3">
+          <div className="flex flex-col sm:flex-row justify-center gap-3">
             <button
               onClick={() => window.print()}
-              className="btn btn-secondary"
+              className="btn btn-secondary w-full sm:w-auto"
             >
               Cetak QR Code
             </button>
             <button
               onClick={() => navigate('/personnel')}
-              className="btn btn-primary"
+              className="btn btn-primary w-full sm:w-auto"
             >
               Kembali ke Daftar Personel
             </button>
@@ -118,23 +118,23 @@ export default function ScreeningForm() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center space-x-4">
-        <button onClick={() => navigate(-1)} className="btn btn-secondary">
+      <div className="flex items-center space-x-3 sm:space-x-4">
+        <button onClick={() => navigate(-1)} className="btn btn-secondary p-2 sm:px-4 sm:py-2">
           <ArrowLeft className="h-5 w-5" />
         </button>
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Skrining Kesehatan</h1>
-          <p className="text-gray-500 mt-1">
+        <div className="min-w-0">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Skrining Kesehatan</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base truncate">
             Personel: <span className="font-semibold">{personnel.name}</span>
             {personnel.rank && ` - ${personnel.rank}`}
           </p>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div className="card">
-          <h2 className="text-xl font-semibold mb-4">Pemeriksaan Tanda Vital</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Pemeriksaan Tanda Vital</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <label className="label">Tanggal Skrining *</label>
               <input
@@ -218,8 +218,8 @@ export default function ScreeningForm() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-semibold mb-4">Hasil Penilaian</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Hasil Penilaian</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="label">Status Kebugaran *</label>
               <select
@@ -248,7 +248,7 @@ export default function ScreeningForm() {
                 <option value="NO_DUTY">Tidak Bertugas</option>
               </select>
             </div>
-            <div className="md:col-span-2">
+            <div className="sm:col-span-2">
               <label className="label">Catatan Pemeriksaan</label>
               <textarea
                 name="fitness_notes"
@@ -274,18 +274,18 @@ export default function ScreeningForm() {
           </div>
         </div>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex flex-col sm:flex-row justify-end gap-3">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="btn btn-secondary"
+            className="btn btn-secondary w-full sm:w-auto"
           >
             Batal
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="btn btn-primary"
+            className="btn btn-primary w-full sm:w-auto"
           >
             {loading ? 'Menyimpan...' : 'Simpan & Generate QR Code'}
           </button>
