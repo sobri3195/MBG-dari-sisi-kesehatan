@@ -84,7 +84,42 @@ export default function PersonnelList() {
           </select>
         </div>
 
-        <div className="overflow-x-auto -mx-6 sm:mx-0">
+        {/* Mobile View - Cards */}
+        <div className="block md:hidden space-y-3">
+          {filteredPersonnel.length === 0 ? (
+            <div className="text-center py-12 text-gray-500 text-sm">
+              Tidak ada data personel
+            </div>
+          ) : (
+            filteredPersonnel.map((person) => (
+              <div key={person.id} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm truncate">{person.name}</p>
+                    <p className="text-xs text-gray-500">{person.rank || '-'}</p>
+                    <p className="text-xs text-gray-500">{person.unit || '-'}</p>
+                  </div>
+                  <span className="badge badge-blue text-xs ml-2">{person.category}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <div className="text-xs text-gray-600">
+                    {person.phone || 'Tidak ada kontak'}
+                  </div>
+                  <Link
+                    to={`/personnel/${person.id}/screening`}
+                    className="text-primary-600 hover:text-primary-900 flex items-center space-x-1 text-sm"
+                  >
+                    <FileText className="h-4 w-4" />
+                    <span>Skrining</span>
+                  </Link>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Desktop View - Table */}
+        <div className="hidden md:block overflow-x-auto -mx-6 sm:mx-0">
           <div className="inline-block min-w-full align-middle">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -92,16 +127,16 @@ export default function PersonnelList() {
                   <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Nama
                   </th>
-                  <th className="hidden md:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Pangkat
                   </th>
-                  <th className="hidden md:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Satuan
                   </th>
                   <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Kategori
                   </th>
-                  <th className="hidden sm:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Kontak
                   </th>
                   <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -115,16 +150,16 @@ export default function PersonnelList() {
                     <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">{person.name}</div>
                     </td>
-                    <td className="hidden md:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {person.rank || '-'}
                     </td>
-                    <td className="hidden md:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {person.unit || '-'}
                     </td>
                     <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                       <span className="badge badge-blue text-xs">{person.category}</span>
                     </td>
-                    <td className="hidden sm:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       {person.phone || '-'}
                     </td>
                     <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm">
@@ -133,7 +168,7 @@ export default function PersonnelList() {
                         className="text-primary-600 hover:text-primary-900 flex items-center space-x-1"
                       >
                         <FileText className="h-4 w-4" />
-                        <span className="hidden sm:inline">Skrining</span>
+                        <span>Skrining</span>
                       </Link>
                     </td>
                   </tr>

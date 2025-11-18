@@ -202,7 +202,7 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <div className="card">
           <h2 className="text-base sm:text-lg font-semibold mb-4">Personel per Kategori</h2>
-          <ResponsiveContainer width="100%" height={250}>
+          <ResponsiveContainer width="100%" height={250} className="text-xs sm:text-sm">
             <PieChart>
               <Pie
                 data={data.personnel_by_category}
@@ -211,14 +211,14 @@ export default function Dashboard() {
                 cx="50%"
                 cy="50%"
                 outerRadius={80}
-                label
+                label={(entry) => entry.count > 0 ? entry.count : ''}
               >
                 {data.personnel_by_category.map((_entry, index) => (
                   <Cell key={`cell-${index}`} fill={['#0ea5e9', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899'][index % 6]} />
                 ))}
               </Pie>
               <Tooltip />
-              <Legend />
+              <Legend wrapperStyle={{ fontSize: '12px' }} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -228,10 +228,10 @@ export default function Dashboard() {
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={data.fitness_distribution}>
               <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="fitness_status" tick={{ fontSize: 12 }} />
-              <YAxis />
+              <XAxis dataKey="fitness_status" tick={{ fontSize: 10 }} angle={-15} textAnchor="end" height={60} />
+              <YAxis tick={{ fontSize: 10 }} />
               <Tooltip />
-              <Legend />
+              <Legend wrapperStyle={{ fontSize: '12px' }} />
               <Bar dataKey="count" fill="#0ea5e9" />
             </BarChart>
           </ResponsiveContainer>

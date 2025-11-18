@@ -104,10 +104,16 @@ export default function ScreeningForm() {
           </div>
 
           <div className="bg-gray-50 p-4 sm:p-6 rounded-lg mb-6">
-            <img src={qrCode} alt="QR Code" className="mx-auto mb-4" style={{ width: '150px', maxWidth: '100%' }} />
+            <div className="flex justify-center mb-4">
+              <img 
+                src={qrCode} 
+                alt="QR Code" 
+                className="w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 object-contain"
+              />
+            </div>
             <p className="text-xs sm:text-sm text-gray-600 mb-2">QR Code Health Clearance</p>
-            <p className="font-semibold text-sm sm:text-base">{personnel.name}</p>
-            <p className="text-xs sm:text-sm text-gray-600">{personnel.rank} - {personnel.unit}</p>
+            <p className="font-semibold text-sm sm:text-base break-words">{personnel.name}</p>
+            <p className="text-xs sm:text-sm text-gray-600 break-words">{personnel.rank} - {personnel.unit}</p>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-center gap-3">
