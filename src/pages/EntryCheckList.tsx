@@ -74,17 +74,64 @@ export default function EntryCheckList() {
           </select>
         </div>
 
-        <div className="overflow-x-auto -mx-6 sm:mx-0">
+        {/* Mobile View - Cards */}
+        <div className="block md:hidden space-y-3">
+          {entries.length === 0 ? (
+            <div className="text-center py-12 text-gray-500 text-sm">Tidak ada data entry check</div>
+          ) : (
+            entries.map((entry) => (
+              <div key={entry.id} className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm truncate">{entry.name}</p>
+                    <p className="text-xs text-gray-500">{entry.category}</p>
+                  </div>
+                  <div className="flex flex-col gap-1 ml-2">
+                    <span className={`badge text-xs ${
+                      entry.triage_category === 'HIJAU' ? 'badge-green' :
+                      entry.triage_category === 'KUNING' ? 'badge-yellow' : 'badge-red'
+                    }`}>
+                      {entry.triage_category}
+                    </span>
+                    <span className={`badge text-xs ${
+                      entry.decision === 'APPROVED' ? 'badge-green' :
+                      entry.decision === 'REJECTED' ? 'badge-red' : 'badge-yellow'
+                    }`}>
+                      {entry.decision}
+                    </span>
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <p className="text-gray-600">Waktu</p>
+                    <p className="font-medium">{formatDateTime(entry.check_time)}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-600">Suhu</p>
+                    <p className="font-medium">{entry.temperature ? `${entry.temperature}°C` : '-'}</p>
+                  </div>
+                  <div className="col-span-2">
+                    <p className="text-gray-600">Checkpoint</p>
+                    <p className="font-medium">{entry.checkpoint_location}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
+        {/* Desktop View - Table */}
+        <div className="hidden md:block overflow-x-auto -mx-6 sm:mx-0">
           <div className="inline-block min-w-full align-middle">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Waktu</th>
                   <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Personel</th>
-                  <th className="hidden md:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Checkpoint</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Checkpoint</th>
                   <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Triage</th>
                   <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Keputusan</th>
-                  <th className="hidden sm:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Suhu</th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Suhu</th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -95,7 +142,7 @@ export default function EntryCheckList() {
                       <div className="text-xs sm:text-sm font-medium">{entry.name}</div>
                       <div className="text-xs text-gray-500">{entry.category}</div>
                     </td>
-                    <td className="hidden md:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm">{entry.checkpoint_location}</td>
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm">{entry.checkpoint_location}</td>
                     <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
                       <span className={`badge text-xs ${
                         entry.triage_category === 'HIJAU' ? 'badge-green' :
@@ -112,7 +159,7 @@ export default function EntryCheckList() {
                         {entry.decision}
                       </span>
                     </td>
-                    <td className="hidden sm:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm">{entry.temperature ? `${entry.temperature}°C` : '-'}</td>
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm">{entry.temperature ? `${entry.temperature}°C` : '-'}</td>
                   </tr>
                 ))}
               </tbody>

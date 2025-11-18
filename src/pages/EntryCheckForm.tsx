@@ -116,16 +116,20 @@ export default function EntryCheckForm() {
         <>
           <div className="card bg-primary-50 border-2 border-primary-200">
             <h3 className="font-semibold mb-2 text-sm sm:text-base">Data Personel:</h3>
-            <p className="text-base sm:text-lg font-bold">{clearance.name}</p>
-            <p className="text-xs sm:text-sm text-gray-600">{clearance.rank} - {clearance.unit}</p>
-            <p className="text-xs sm:text-sm mt-2">
-              Status: <span className={`badge text-xs ${clearance.clearance_status === 'VALID' ? 'badge-green' : 'badge-red'}`}>
-                {clearance.clearance_status}
-              </span>
+            <p className="text-base sm:text-lg font-bold break-words">{clearance.personnel?.name || clearance.name}</p>
+            <p className="text-xs sm:text-sm text-gray-600 break-words">
+              {clearance.personnel?.rank || clearance.rank} - {clearance.personnel?.unit || clearance.unit}
             </p>
-            <p className="text-xs sm:text-sm">
-              Kebugaran: <span className="badge badge-blue text-xs">{clearance.fitness_status}</span>
-            </p>
+            <div className="flex flex-wrap gap-2 mt-2">
+              <div className="text-xs sm:text-sm">
+                Status: <span className={`badge text-xs ${clearance.clearance_status === 'VALID' ? 'badge-green' : 'badge-red'}`}>
+                  {clearance.clearance_status}
+                </span>
+              </div>
+              <div className="text-xs sm:text-sm">
+                Kebugaran: <span className="badge badge-blue text-xs">{clearance.fitness_status}</span>
+              </div>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">

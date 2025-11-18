@@ -35,10 +35,16 @@ export default function Reports() {
         approved: filteredEntries.filter(e => e.decision === 'APPROVED').length,
         observation: filteredEntries.filter(e => e.decision === 'OBSERVATION').length,
         rejected: filteredEntries.filter(e => e.decision === 'REJECTED').length,
+        by_checkpoint: Object.entries(
+          filteredEntries.reduce((acc: any, e) => {
+            acc[e.checkpoint_location] = (acc[e.checkpoint_location] || 0) + 1;
+            return acc;
+          }, {})
+        ).map(([checkpoint_location, count]) => ({ checkpoint_location, count })),
         by_triage: [
-          { category: 'HIJAU', count: filteredEntries.filter(e => e.triage_category === 'HIJAU').length },
-          { category: 'KUNING', count: filteredEntries.filter(e => e.triage_category === 'KUNING').length },
-          { category: 'MERAH', count: filteredEntries.filter(e => e.triage_category === 'MERAH').length },
+          { triage_category: 'HIJAU', count: filteredEntries.filter(e => e.triage_category === 'HIJAU').length },
+          { triage_category: 'KUNING', count: filteredEntries.filter(e => e.triage_category === 'KUNING').length },
+          { triage_category: 'MERAH', count: filteredEntries.filter(e => e.triage_category === 'MERAH').length },
         ],
       };
       
@@ -48,12 +54,34 @@ export default function Reports() {
         ringan: filteredIncidents.filter(i => i.severity === 'RINGAN').length,
         sedang: filteredIncidents.filter(i => i.severity === 'SEDANG').length,
         berat: filteredIncidents.filter(i => i.severity === 'BERAT').length,
+        by_severity: [
+          { severity: 'RINGAN', count: filteredIncidents.filter(i => i.severity === 'RINGAN').length },
+          { severity: 'SEDANG', count: filteredIncidents.filter(i => i.severity === 'SEDANG').length },
+          { severity: 'BERAT', count: filteredIncidents.filter(i => i.severity === 'BERAT').length },
+        ],
         by_type: Object.entries(
           filteredIncidents.reduce((acc: any, i) => {
             acc[i.incident_type] = (acc[i.incident_type] || 0) + 1;
             return acc;
           }, {})
-        ).map(([type, count]) => ({ type, count })),
+        ).map(([type, count]) => ({ incident_type: type, count })),
+        by_hour: Array.from({ length: 24 }, (_, i) => {
+          const hour = i.toString().padStart(2, '0') + ':00';
+          const count = filteredIncidents.filter(incident => {
+            const incidentHour = new Date(incident.incident_time).getHours();
+            return incidentHour === i;
+          }).length;
+          return { hour, count };
+        }).filter(h => h.count > 0),
+        by_location: Object.entries(
+          filteredIncidents.reduce((acc: any, i) => {
+            acc[i.location] = (acc[i.location] || 0) + 1;
+            return acc;
+          }, {})
+        )
+        .map(([location, count]) => ({ location, count }))
+        .sort((a: any, b: any) => b.count - a.count)
+        .slice(0, 5),
       };
       
       setEntryStats(entryStats);
@@ -123,8 +151,8 @@ export default function Reports() {
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={entryStats.by_checkpoint}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="checkpoint_location" tick={{ fontSize: 11 }} />
-                  <YAxis tick={{ fontSize: 11 }} />
+                  <XAxis dataKey="checkpoint_location" tick={{ fontSize: 9 }} angle={-15} textAnchor="end" height={60} />
+                  <YAxis tick={{ fontSize: 10 }} />
                   <Tooltip />
                   <Bar dataKey="count" fill="#0ea5e9" />
                 </BarChart>
@@ -141,7 +169,7 @@ export default function Reports() {
                     cx="50%"
                     cy="50%"
                     outerRadius={80}
-                    label
+                    label={(entry) => entry.count > 0 ? entry.count : ''}
                   >
                     {entryStats.by_triage.map((entry: any, index: number) => (
                       <Cell key={`cell-${index}`} fill={
@@ -151,7 +179,7 @@ export default function Reports() {
                     ))}
                   </Pie>
                   <Tooltip />
-                  <Legend />
+                  <Legend wrapperStyle={{ fontSize: '12px' }} />
                 </PieChart>
               </ResponsiveContainer>
             </div>
@@ -192,8 +220,8 @@ export default function Reports() {
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={incidentStats.by_type} layout="horizontal">
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" tick={{ fontSize: 11 }} />
-                  <YAxis type="category" dataKey="incident_type" width={80} tick={{ fontSize: 10 }} />
+                  <XAxis type="number" tick={{ fontSize: 10 }} />
+                  <YAxis type="category" dataKey="incident_type" width={100} tick={{ fontSize: 9 }} />
                   <Tooltip />
                   <Bar dataKey="count" fill="#f59e0b" />
                 </BarChart>
@@ -204,8 +232,8 @@ export default function Reports() {
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={incidentStats.by_hour}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="hour" tick={{ fontSize: 11 }} />
-                  <YAxis tick={{ fontSize: 11 }} />
+                  <XAxis dataKey="hour" tick={{ fontSize: 9 }} angle={-15} textAnchor="end" height={60} />
+                  <YAxis tick={{ fontSize: 10 }} />
                   <Tooltip />
                   <Bar dataKey="count" fill="#ef4444" />
                 </BarChart>
