@@ -45,12 +45,12 @@ export default function PersonnelList() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Data Personel</h1>
-          <p className="text-gray-500 mt-1">Manajemen data personel MBG</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Data Personel</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Manajemen data personel MBG</p>
         </div>
-        <Link to="/personnel/new" className="btn btn-primary flex items-center space-x-2">
+        <Link to="/personnel/new" className="btn btn-primary flex items-center justify-center space-x-2">
           <Plus className="h-5 w-5" />
           <span>Tambah Personel</span>
         </Link>
@@ -83,66 +83,68 @@ export default function PersonnelList() {
           </select>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Nama
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Pangkat
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Satuan
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Kategori
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Kontak
-                </th>
-                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Aksi
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredPersonnel.map((person) => (
-                <tr key={person.id} className="hover:bg-gray-50">
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">{person.name}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {person.rank || '-'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {person.unit || '-'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className="badge badge-blue">{person.category}</span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {person.phone || '-'}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <Link
-                      to={`/personnel/${person.id}/screening`}
-                      className="text-primary-600 hover:text-primary-900 flex items-center space-x-1"
-                    >
-                      <FileText className="h-4 w-4" />
-                      <span>Skrining</span>
-                    </Link>
-                  </td>
+        <div className="overflow-x-auto -mx-6 sm:mx-0">
+          <div className="inline-block min-w-full align-middle">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Nama
+                  </th>
+                  <th className="hidden md:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Pangkat
+                  </th>
+                  <th className="hidden md:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Satuan
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Kategori
+                  </th>
+                  <th className="hidden sm:table-cell px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Kontak
+                  </th>
+                  <th className="px-3 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Aksi
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          {filteredPersonnel.length === 0 && (
-            <div className="text-center py-12 text-gray-500">
-              Tidak ada data personel
-            </div>
-          )}
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredPersonnel.map((person) => (
+                  <tr key={person.id} className="hover:bg-gray-50">
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm font-medium text-gray-900">{person.name}</div>
+                    </td>
+                    <td className="hidden md:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {person.rank || '-'}
+                    </td>
+                    <td className="hidden md:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {person.unit || '-'}
+                    </td>
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap">
+                      <span className="badge badge-blue text-xs">{person.category}</span>
+                    </td>
+                    <td className="hidden sm:table-cell px-3 sm:px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {person.phone || '-'}
+                    </td>
+                    <td className="px-3 sm:px-6 py-4 whitespace-nowrap text-sm">
+                      <Link
+                        to={`/personnel/${person.id}/screening`}
+                        className="text-primary-600 hover:text-primary-900 flex items-center space-x-1"
+                      >
+                        <FileText className="h-4 w-4" />
+                        <span className="hidden sm:inline">Skrining</span>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {filteredPersonnel.length === 0 && (
+              <div className="text-center py-12 text-gray-500 text-sm">
+                Tidak ada data personel
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

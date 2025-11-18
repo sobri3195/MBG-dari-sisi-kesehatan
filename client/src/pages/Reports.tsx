@@ -36,12 +36,12 @@ export default function Reports() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Laporan</h1>
-          <p className="text-gray-500 mt-1">Analisis dan statistik pengamanan kesehatan</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Laporan</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Analisis dan statistik pengamanan kesehatan</p>
         </div>
-        <button className="btn btn-primary flex items-center space-x-2">
+        <button className="btn btn-primary flex items-center justify-center space-x-2">
           <Download className="h-5 w-5" />
           <span>Export PDF</span>
         </button>
@@ -49,54 +49,54 @@ export default function Reports() {
 
       <div className="card">
         <div className="flex items-center space-x-4 mb-6">
-          <FileText className="h-6 w-6 text-primary-600" />
-          <h2 className="text-xl font-semibold">Pilih Tanggal Laporan</h2>
+          <FileText className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600" />
+          <h2 className="text-lg sm:text-xl font-semibold">Pilih Tanggal Laporan</h2>
         </div>
         <input
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
-          className="input w-64"
+          className="input w-full sm:w-64"
         />
       </div>
 
       {entryStats && (
         <div className="card">
-          <h2 className="text-xl font-semibold mb-4">Statistik Entry Check</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-            <div className="bg-blue-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Total Check</p>
-              <p className="text-2xl font-bold text-blue-600">{entryStats.total}</p>
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Statistik Entry Check</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-6">
+            <div className="bg-blue-50 p-3 sm:p-4 rounded-lg">
+              <p className="text-xs sm:text-sm text-gray-600">Total Check</p>
+              <p className="text-xl sm:text-2xl font-bold text-blue-600">{entryStats.total}</p>
             </div>
-            <div className="bg-green-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Disetujui</p>
-              <p className="text-2xl font-bold text-green-600">{entryStats.approved}</p>
+            <div className="bg-green-50 p-3 sm:p-4 rounded-lg">
+              <p className="text-xs sm:text-sm text-gray-600">Disetujui</p>
+              <p className="text-xl sm:text-2xl font-bold text-green-600">{entryStats.approved}</p>
             </div>
-            <div className="bg-yellow-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Observasi</p>
-              <p className="text-2xl font-bold text-yellow-600">{entryStats.observation}</p>
+            <div className="bg-yellow-50 p-3 sm:p-4 rounded-lg">
+              <p className="text-xs sm:text-sm text-gray-600">Observasi</p>
+              <p className="text-xl sm:text-2xl font-bold text-yellow-600">{entryStats.observation}</p>
             </div>
-            <div className="bg-red-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Ditolak</p>
-              <p className="text-2xl font-bold text-red-600">{entryStats.rejected}</p>
+            <div className="bg-red-50 p-3 sm:p-4 rounded-lg">
+              <p className="text-xs sm:text-sm text-gray-600">Ditolak</p>
+              <p className="text-xl sm:text-2xl font-bold text-red-600">{entryStats.rejected}</p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <h3 className="font-semibold mb-3">Per Checkpoint</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-3">Per Checkpoint</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={entryStats.by_checkpoint}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="checkpoint_location" />
-                  <YAxis />
+                  <XAxis dataKey="checkpoint_location" tick={{ fontSize: 11 }} />
+                  <YAxis tick={{ fontSize: 11 }} />
                   <Tooltip />
                   <Bar dataKey="count" fill="#0ea5e9" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
             <div>
-              <h3 className="font-semibold mb-3">Per Kategori Triage</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-3">Per Kategori Triage</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
                   <Pie
@@ -126,22 +126,22 @@ export default function Reports() {
 
       {incidentStats && (
         <div className="card">
-          <h2 className="text-xl font-semibold mb-4">Statistik Insiden</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div className="bg-orange-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-600">Total Insiden</p>
-              <p className="text-2xl font-bold text-orange-600">{incidentStats.total}</p>
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Statistik Insiden</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-6">
+            <div className="bg-orange-50 p-3 sm:p-4 rounded-lg">
+              <p className="text-xs sm:text-sm text-gray-600">Total Insiden</p>
+              <p className="text-xl sm:text-2xl font-bold text-orange-600">{incidentStats.total}</p>
             </div>
             {incidentStats.by_severity.map((item: any) => (
               <div
                 key={item.severity}
-                className={`p-4 rounded-lg ${
+                className={`p-3 sm:p-4 rounded-lg ${
                   item.severity === 'BERAT' ? 'bg-red-50' :
                   item.severity === 'SEDANG' ? 'bg-yellow-50' : 'bg-green-50'
                 }`}
               >
-                <p className="text-sm text-gray-600">{item.severity}</p>
-                <p className={`text-2xl font-bold ${
+                <p className="text-xs sm:text-sm text-gray-600">{item.severity}</p>
+                <p className={`text-xl sm:text-2xl font-bold ${
                   item.severity === 'BERAT' ? 'text-red-600' :
                   item.severity === 'SEDANG' ? 'text-yellow-600' : 'text-green-600'
                 }`}>
@@ -151,26 +151,26 @@ export default function Reports() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
             <div>
-              <h3 className="font-semibold mb-3">Jenis Insiden</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-3">Jenis Insiden</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={incidentStats.by_type} layout="horizontal">
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" />
-                  <YAxis type="category" dataKey="incident_type" width={100} />
+                  <XAxis type="number" tick={{ fontSize: 11 }} />
+                  <YAxis type="category" dataKey="incident_type" width={80} tick={{ fontSize: 10 }} />
                   <Tooltip />
                   <Bar dataKey="count" fill="#f59e0b" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
             <div>
-              <h3 className="font-semibold mb-3">Insiden per Jam</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-3">Insiden per Jam</h3>
               <ResponsiveContainer width="100%" height={250}>
                 <BarChart data={incidentStats.by_hour}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="hour" />
-                  <YAxis />
+                  <XAxis dataKey="hour" tick={{ fontSize: 11 }} />
+                  <YAxis tick={{ fontSize: 11 }} />
                   <Tooltip />
                   <Bar dataKey="count" fill="#ef4444" />
                 </BarChart>
@@ -180,12 +180,12 @@ export default function Reports() {
 
           {incidentStats.by_location && incidentStats.by_location.length > 0 && (
             <div className="mt-6">
-              <h3 className="font-semibold mb-3">Lokasi Rawan Insiden</h3>
+              <h3 className="text-sm sm:text-base font-semibold mb-3">Lokasi Rawan Insiden</h3>
               <div className="space-y-2">
                 {incidentStats.by_location.map((loc: any) => (
-                  <div key={loc.location} className="flex items-center justify-between p-3 bg-gray-50 rounded">
-                    <span className="font-medium">{loc.location}</span>
-                    <span className="badge badge-red">{loc.count} insiden</span>
+                  <div key={loc.location} className="flex items-center justify-between p-2 sm:p-3 bg-gray-50 rounded">
+                    <span className="font-medium text-sm sm:text-base truncate pr-2">{loc.location}</span>
+                    <span className="badge badge-red text-xs flex-shrink-0">{loc.count} insiden</span>
                   </div>
                 ))}
               </div>

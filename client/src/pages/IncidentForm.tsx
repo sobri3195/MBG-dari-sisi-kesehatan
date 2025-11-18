@@ -56,20 +56,20 @@ export default function IncidentForm() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center space-x-4">
-        <button onClick={() => navigate(-1)} className="btn btn-secondary">
+      <div className="flex items-center space-x-3 sm:space-x-4">
+        <button onClick={() => navigate(-1)} className="btn btn-secondary p-2 sm:px-4 sm:py-2">
           <ArrowLeft className="h-5 w-5" />
         </button>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Laporan Insiden</h1>
-          <p className="text-gray-500 mt-1">Pencatatan insiden kesehatan</p>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Laporan Insiden</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Pencatatan insiden kesehatan</p>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div className="card">
-          <h2 className="text-xl font-semibold mb-4">Informasi Insiden</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Informasi Insiden</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="label">Personel Terdampak *</label>
               <select
@@ -133,7 +133,7 @@ export default function IncidentForm() {
                 <option value="BERAT">Berat</option>
               </select>
             </div>
-            <div className="md:col-span-2">
+            <div className="sm:col-span-2">
               <label className="label">Gejala/Keluhan *</label>
               <textarea
                 name="symptoms"
@@ -145,7 +145,7 @@ export default function IncidentForm() {
                 placeholder="Deskripsi gejala dan keluhan"
               />
             </div>
-            <div className="md:col-span-2">
+            <div className="sm:col-span-2">
               <label className="label">Tanda Vital</label>
               <input
                 type="text"
@@ -160,9 +160,9 @@ export default function IncidentForm() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-semibold mb-4">Tindakan & Hasil</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="md:col-span-2">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Tindakan & Hasil</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="sm:col-span-2">
               <label className="label">Tindakan yang Dilakukan *</label>
               <textarea
                 name="actions_taken"
@@ -213,7 +213,7 @@ export default function IncidentForm() {
                 placeholder="Nama petugas medis"
               />
             </div>
-            <div className="md:col-span-2">
+            <div className="sm:col-span-2">
               <label className="label">Catatan Tambahan</label>
               <textarea
                 name="notes"
@@ -227,18 +227,18 @@ export default function IncidentForm() {
           </div>
         </div>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex flex-col sm:flex-row justify-end gap-3">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="btn btn-secondary"
+            className="btn btn-secondary w-full sm:w-auto"
           >
             Batal
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="btn btn-primary"
+            className="btn btn-primary w-full sm:w-auto"
           >
             {loading ? 'Menyimpan...' : 'Simpan Laporan Insiden'}
           </button>

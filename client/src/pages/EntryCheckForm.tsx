@@ -63,22 +63,22 @@ export default function EntryCheckForm() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center space-x-4">
-        <button onClick={() => navigate(-1)} className="btn btn-secondary">
+      <div className="flex items-center space-x-3 sm:space-x-4">
+        <button onClick={() => navigate(-1)} className="btn btn-secondary p-2 sm:px-4 sm:py-2">
           <ArrowLeft className="h-5 w-5" />
         </button>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Entry Check</h1>
-          <p className="text-gray-500 mt-1">Pemeriksaan kesehatan di pintu masuk</p>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Entry Check</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Pemeriksaan kesehatan di pintu masuk</p>
         </div>
       </div>
 
       {step === 'scan' ? (
         <div className="max-w-2xl mx-auto card">
           <div className="text-center mb-6">
-            <Scan className="h-16 w-16 mx-auto text-primary-600 mb-4" />
-            <h2 className="text-2xl font-bold">Scan QR Code Health Clearance</h2>
-            <p className="text-gray-600 mt-2">Masukkan kode QR atau ID clearance</p>
+            <Scan className="h-12 w-12 sm:h-16 sm:w-16 mx-auto text-primary-600 mb-4" />
+            <h2 className="text-xl sm:text-2xl font-bold">Scan QR Code Health Clearance</h2>
+            <p className="text-gray-600 mt-2 text-sm sm:text-base">Masukkan kode QR atau ID clearance</p>
           </div>
 
           <div className="space-y-4">
@@ -88,7 +88,7 @@ export default function EntryCheckForm() {
                 value={qrInput}
                 onChange={(e) => setQrInput(e.target.value)}
                 placeholder="MBG-HC-xxxxxxxx"
-                className="input text-center text-lg"
+                className="input text-center text-base sm:text-lg"
                 autoFocus
               />
             </div>
@@ -104,23 +104,23 @@ export default function EntryCheckForm() {
       ) : (
         <>
           <div className="card bg-primary-50 border-2 border-primary-200">
-            <h3 className="font-semibold mb-2">Data Personel:</h3>
-            <p className="text-lg font-bold">{clearance.name}</p>
-            <p className="text-sm text-gray-600">{clearance.rank} - {clearance.unit}</p>
-            <p className="text-sm mt-2">
-              Status: <span className={`badge ${clearance.clearance_status === 'VALID' ? 'badge-green' : 'badge-red'}`}>
+            <h3 className="font-semibold mb-2 text-sm sm:text-base">Data Personel:</h3>
+            <p className="text-base sm:text-lg font-bold">{clearance.name}</p>
+            <p className="text-xs sm:text-sm text-gray-600">{clearance.rank} - {clearance.unit}</p>
+            <p className="text-xs sm:text-sm mt-2">
+              Status: <span className={`badge text-xs ${clearance.clearance_status === 'VALID' ? 'badge-green' : 'badge-red'}`}>
                 {clearance.clearance_status}
               </span>
             </p>
-            <p className="text-sm">
-              Kebugaran: <span className="badge badge-blue">{clearance.fitness_status}</span>
+            <p className="text-xs sm:text-sm">
+              Kebugaran: <span className="badge badge-blue text-xs">{clearance.fitness_status}</span>
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             <div className="card">
-              <h2 className="text-xl font-semibold mb-4">Pemeriksaan Cepat</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <h2 className="text-lg sm:text-xl font-semibold mb-4">Pemeriksaan Cepat</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="label">Lokasi Checkpoint *</label>
                   <input
@@ -145,7 +145,7 @@ export default function EntryCheckForm() {
                     placeholder="°C"
                   />
                 </div>
-                <div className="md:col-span-2">
+                <div className="sm:col-span-2">
                   <label className="label">Gejala/Keluhan</label>
                   <input
                     type="text"
@@ -184,7 +184,7 @@ export default function EntryCheckForm() {
                     <option value="REJECTED">Ditolak/Rujuk</option>
                   </select>
                 </div>
-                <div className="md:col-span-2">
+                <div className="sm:col-span-2">
                   <label className="label">Catatan</label>
                   <textarea
                     name="notes"
@@ -210,18 +210,18 @@ export default function EntryCheckForm() {
               </div>
             </div>
 
-            <div className="flex justify-end space-x-3">
+            <div className="flex flex-col sm:flex-row justify-end gap-3">
               <button
                 type="button"
                 onClick={() => setStep('scan')}
-                className="btn btn-secondary"
+                className="btn btn-secondary w-full sm:w-auto"
               >
                 Scan Ulang
               </button>
               <button
                 type="submit"
                 disabled={loading}
-                className="btn btn-primary"
+                className="btn btn-primary w-full sm:w-auto"
               >
                 {loading ? 'Menyimpan...' : 'Simpan Entry Check'}
               </button>

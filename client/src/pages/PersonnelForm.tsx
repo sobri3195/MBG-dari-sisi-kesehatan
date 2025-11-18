@@ -61,20 +61,20 @@ export default function PersonnelForm() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center space-x-4">
-        <button onClick={() => navigate(-1)} className="btn btn-secondary">
+      <div className="flex items-center space-x-3 sm:space-x-4">
+        <button onClick={() => navigate(-1)} className="btn btn-secondary p-2 sm:px-4 sm:py-2">
           <ArrowLeft className="h-5 w-5" />
         </button>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Tambah Personel Baru</h1>
-          <p className="text-gray-500 mt-1">Registrasi personel dan profil kesehatan</p>
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900">Tambah Personel Baru</h1>
+          <p className="text-gray-500 mt-1 text-sm sm:text-base">Registrasi personel dan profil kesehatan</p>
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
         <div className="card">
-          <h2 className="text-xl font-semibold mb-4">Data Personel</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Data Personel</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="label">Nama Lengkap *</label>
               <input
@@ -152,7 +152,7 @@ export default function PersonnelForm() {
         </div>
 
         <div className="card">
-          <h2 className="text-xl font-semibold mb-4">Profil Kesehatan</h2>
+          <h2 className="text-lg sm:text-xl font-semibold mb-4">Profil Kesehatan</h2>
           <div className="space-y-4">
             <div>
               <label className="label">Riwayat Penyakit</label>
@@ -209,7 +209,7 @@ export default function PersonnelForm() {
                 placeholder="Diabetes, hipertensi, asma, dll"
               />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="label">Nama Kontak Darurat</label>
                 <input
@@ -236,18 +236,18 @@ export default function PersonnelForm() {
           </div>
         </div>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex flex-col sm:flex-row justify-end gap-3">
           <button
             type="button"
             onClick={() => navigate(-1)}
-            className="btn btn-secondary"
+            className="btn btn-secondary w-full sm:w-auto"
           >
             Batal
           </button>
           <button
             type="submit"
             disabled={loading}
-            className="btn btn-primary"
+            className="btn btn-primary w-full sm:w-auto"
           >
             {loading ? 'Menyimpan...' : 'Simpan Personel'}
           </button>
